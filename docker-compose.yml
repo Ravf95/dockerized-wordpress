@@ -1,0 +1,34 @@
+services:
+  mariadb:
+    image: mariadb:10.6.4-focal
+    container_name: link.ravf.mariadb
+    restart: always
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    env_file:
+      - .env
+    ports:
+      - ${MYSQL_PORT}:3306
+      - ${MYSQL_X_PORT}:33060
+  wordpress:
+    image: wordpress:latest
+    container_name: link.ravf.wordpress
+    restart: always
+    volumes:
+      - wordpress-data:/var/www/html
+    env_file:
+      - .env
+    ports:
+      - ${WORDPRESS_HTTP_PORT}:80
+
+volumes:
+  mariadb-data:
+    name: mariadb-data
+  wordpress-data:
+    name: wordpress-data
+
+networks:
+  default:
+    name: link.ravf.external
+    external: true
