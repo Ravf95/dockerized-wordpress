@@ -1,6 +1,6 @@
-## Dockerized Wordpress
+# Dockerized Wordpress
 
-# Deploy steps
+## Deploy steps
 
 1. Rename `.env.example` file to `.env` and change values to your own configuration.
 2. Run `docker network create link.ravf.external`.
